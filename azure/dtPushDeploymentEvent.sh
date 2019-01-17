@@ -31,7 +31,7 @@ EOF
 )
 echo "$postData"
 echo  $(Dynatrace_Tenant)"/api/v1/events"
-Dynatrace_APIURL="$(Dynatrace_Tenant)"
+Dynatrace_APIURL="$(dynatraceTennantUrl)"
 Dynatrace_APIURL="$Dynatrace_APIURL/api/v1/events"
 echo "$Dynatrace_APIURL"
-curl --url "$Dynatrace_APIURL" -H "Content-type: application/json" -H "Authorization: Api-Token "$(Dynatrace_API_TOKEN) -X POST -d  "$postData"
+curl --url "$Dynatrace_APIURL" -H "Content-type: application/json" -H "Authorization: Api-Token "$(dynatraceApiToken) -X POST -d  "$postData"
