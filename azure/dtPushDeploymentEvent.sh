@@ -1,5 +1,5 @@
 
-postData=$cat <<EOF
+postData=$(cat <<EOF
     {
         "eventType" : "CUSTOM_DEPLOYMENT",
         "source" : "AzureDevops" ,
@@ -27,7 +27,7 @@ postData=$cat <<EOF
                    ]
         }
 }
-EOF
+EOF)
 
 url="$1/api/v1/events"
 echo "Dynatrace URL: $url"
