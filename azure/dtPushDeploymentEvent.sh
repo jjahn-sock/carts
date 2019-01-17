@@ -13,14 +13,14 @@ postData=$cat <<EOF
                        "meTypes":"SERVICE" ,
                    "tags" : [
                        {
-                           "context" : "KUBERNETES",
-                           "key": "app",
+                        "context" : "KUBERNETES",
+                        "key": "app",
                         "value" : "carts"    
                        },
                        {
                            "context" : "CONTEXTLESS",
                            "key": "environment",
-                        "value" : "$stageName"    
+                        "value" : "$3"    
                        }
                        ]
                    }
@@ -29,8 +29,9 @@ postData=$cat <<EOF
 }
 EOF
 
-Dynatrace_APIURL="$dynatraceTenantUrl"
-Dynatrace_APIURL="$Dynatrace_APIURL/api/v1/events"
-echo "API URL: $Dynatrace_APIURL"
+url="$1/api/v1/events"
+echo "Dynatrace URL: $url"
+echo "Dynatrace Token: $2"
+echo "Environment: $3"
 echo "$postData"
-curl --url "$Dynatrace_APIURL" -H "Content-type: application/json" -H "Authorization: Api-Token "$dynatraceApiToken -X POST -d  "$postData"
+curl --url "$url" -H "Content-type: application/json" -H "Authorization: Api-Token "$2 -X POST -d  "$postData"
