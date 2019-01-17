@@ -1,4 +1,4 @@
-#!/bin/sh
+
 postData=$cat <<EOF
     {
         "eventType" : "CUSTOM_DEPLOYMENT",
@@ -29,7 +29,8 @@ postData=$cat <<EOF
 }
 EOF
 
-url="$dynatraceTenantUrl/api/v1/events"
-echo "API URL: $url"
+Dynatrace_APIURL="$dynatraceTenantUrl"
+Dynatrace_APIURL="$Dynatrace_APIURL/api/v1/events"
+echo "API URL: $Dynatrace_APIURL"
 echo "$postData"
-curl --url "$url" -H "Content-type: application/json" -H "Authorization: Api-Token "$dynatraceApiToken -X POST -d  "$postData"
+curl --url "$Dynatrace_APIURL" -H "Content-type: application/json" -H "Authorization: Api-Token "$dynatraceApiToken -X POST -d  "$postData"
