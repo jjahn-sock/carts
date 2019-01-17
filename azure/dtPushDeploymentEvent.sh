@@ -28,7 +28,7 @@ postData=$cat <<EOF
         }
 }
 EOF
-)
+
 url="$dynatraceTenantUrl/api/v1/events"
 echo "API URL: $url"
 echo "$postData"
