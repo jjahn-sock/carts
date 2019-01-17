@@ -1,11 +1,12 @@
-postData=$(cat <<EOF
+
+postData=$cat <<EOF
     {
         "eventType" : "CUSTOM_DEPLOYMENT",
         "source" : "AzureDevops" ,
-        "deploymentName" : "$(Release.DefinitionName)",
-        "deploymentVersion" : "$(Release.ReleaseId)"  ,
-        "deploymentProject" : "$(System.TeamProject)" ,
-        "ciBackLink" : "$(System.TeamFoundationCollectionUri)",
+        "deploymentName" : "$Release.DefinitionName",
+        "deploymentVersion" : "$Release.ReleaseId"  ,
+        "deploymentProject" : "$System.TeamProject" ,
+        "ciBackLink" : "$System.TeamFoundationCollectionUri",
         "attachRules" : {
                "tagRule" : [
                    {
@@ -19,7 +20,7 @@ postData=$(cat <<EOF
                        {
                            "context" : "CONTEXTLESS",
                            "key": "environment",
-                        "value" : "$(stageName)"    
+                        "value" : "$stageName"    
                        }
                        ]
                    }
@@ -28,9 +29,7 @@ postData=$(cat <<EOF
 }
 EOF
 )
+url="$dynatraceTenantUrl/api/v1/events"
+echo "API URL: $url"
 echo "$postData"
-echo  $(dynatraceTenantUrl)"/api/v1/events"
-Dynatrace_APIURL="$(dynatraceTenantUrl)"
-Dynatrace_APIURL="$Dynatrace_APIURL/api/v1/events"
-echo "API URL: $Dynatrace_APIURL"
-curl --url "$Dynatrace_APIURL" -H "Content-type: application/json" -H "Authorization: Api-Token "$(dynatraceApiToken) -X POST -d  "$postData"
+curl --url "$url" -H "Content-type: application/json" -H "Authorization: Api-Token "$dynatraceApiToken -X POST -d  "$postData"
