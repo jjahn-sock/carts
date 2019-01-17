@@ -71,3 +71,15 @@ steps:
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
     artifactName: Yaml
+    
+- task: CopyFiles@2
+  displayName: Create Archive with Dynatrace Scripts
+  inputs:
+    contents: *.sh
+    targetFolder: $(Build.ArtifactStagingDirectory)
+
+- task: PublishBuildArtifacts@1
+  displayName: Publish Archive with Dynatrace Scripts
+  inputs:
+    pathtoPublish: $(Build.ArtifactStagingDirectory)
+    artifactName: Scripts
