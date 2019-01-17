@@ -73,13 +73,13 @@ steps:
     artifactName: Yaml
     
 - task: CopyFiles@2
-  displayName: Create Archive with Dynatrace Scripts
+  displayName: Create Archive with Azure Pipeline Scripts
   inputs:
-    contents: *.sh
+    contents: azure/*
     targetFolder: $(Build.ArtifactStagingDirectory)
 
 - task: PublishBuildArtifacts@1
-  displayName: Publish Archive with Dynatrace Scripts
+  displayName: Publish Archive with Azure Pipeline Scripts
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
     artifactName: Scripts
