@@ -63,13 +63,17 @@ steps:
 - task: CopyFiles@2
   displayName: Create Archive with Kubernetes YAML
   inputs:
-    contents: 
-      manifest/*
-      azure/*
+    contents: manifest/*
     targetFolder: $(Build.ArtifactStagingDirectory)
 
+- task: CopyFiles@2
+  displayName: Create Archive with Azure Pipeline Scripts
+  inputs:
+    contents: azure/*
+    targetFolder: $(Build.ArtifactStagingDirectory)
+    
 - task: PublishBuildArtifacts@1
-  displayName: Publish Archive with Azure Pipeline Scripts
+  displayName: Publish Archive
   inputs:
     pathtoPublish: $(Build.ArtifactStagingDirectory)
     artifactName: Pipeline
