@@ -1,4 +1,4 @@
-
+#!/bin/sh
 postData=$cat <<EOF
     {
         "eventType" : "CUSTOM_DEPLOYMENT",
